@@ -1,0 +1,34 @@
+.view {
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo {
+  align-items: center;
+  color: inherit;
+}
+
+.logo .icon {
+  margin-right: 5px;
+}
+
+.flexPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

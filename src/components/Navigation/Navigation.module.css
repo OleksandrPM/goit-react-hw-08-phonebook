@@ -1,0 +1,17 @@
+.navList {
+  display: flex;
+  gap: 15px;
+}
+
+.navLink {
+  color: inherit;
+}
+
+.navLink:hover,
+.navLink:focus {
+  color: red;
+}
+
+.navLink.active {
+  color: red;
+}

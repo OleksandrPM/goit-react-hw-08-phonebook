@@ -2,11 +2,12 @@ import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter/Filter';
 import css from './Contacts.module.css';
+import InvitationText from 'components/InvitationText/InvitationText';
 // import { useSelector } from 'react-redux';
 
 export default function Contacts() {
   //   const isLogin = useSelector();
-  const isLogin = true; //del
+  const isLogin = false; //del
 
   return isLogin ? (
     <div className={css.app}>
@@ -18,6 +19,6 @@ export default function Contacts() {
       </section>
     </div>
   ) : (
-    <h2>Please, log in!</h2>
+    <InvitationText />
   );
 }
