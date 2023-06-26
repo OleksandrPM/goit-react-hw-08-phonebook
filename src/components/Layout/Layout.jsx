@@ -13,7 +13,8 @@ import Navigation from 'components/Navigation';
 import UserMenu from 'components/UserMenu';
 import InvitationText from 'components/InvitationText';
 import css from './Layout.module.css';
-import ResponsiveAppBar from 'components/ResponsiveAppBar';
+// import ResponsiveAppBar from 'components/ResponsiveAppBar';
+import { ToastContainer } from 'react-toastify';
 
 // const Loader = lazy(() => import('../Loader'));
 
@@ -27,6 +28,7 @@ export default function Layout() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <ToastContainer />
       <CssBaseline />
       <div className={css.flexPage}>
         <AppBar position="relative">

@@ -1,6 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login } from 'contacts-api/auth';
+import { current, login } from 'contacts-api/auth';
 
-export const loginThunk = createAsyncThunk('auth/login', user => {
-  return login(user);
-});
+export const currentThunk = createAsyncThunk('auth/current', () => current());
+
+export const loginThunk = createAsyncThunk(
+  'auth/login',
+  async (user, { rejectWithValue, dispatch }) => {
+    try {
+      const data = await login(user);
+      dispatch(currentThunk());
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);

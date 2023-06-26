@@ -10,23 +10,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { signup } from 'contacts-api/auth';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { errorRegisterMsg, successRegisterMsg } from 'toast/toast-messadges';
 
 const defaultTheme = createTheme();
 
 export default function Register() {
-  const isLogin = true; //change on the value from the store
-  const dispatch = useDispatch();
+  // const isLogin = true; //change on the value from the store
+  // const dispatch = useDispatch();
 
   const navigate = useNavigate();
-
-  const succsesNotify = () => toast.success('You are successfully signed up!');
-  const errorNotify = () =>
-    toast.error('Something going wrong... Please, try again!');
-  succsesNotify();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -39,11 +32,11 @@ export default function Register() {
 
     signup({ name, email, password })
       .then(() => {
-        succsesNotify();
+        successRegisterMsg(); //It isn`t showed - think about it
         navigate('/login');
       })
       .catch(error => {
-        errorNotify();
+        errorRegisterMsg();
         console.log(error);
       });
   };
@@ -130,7 +123,6 @@ export default function Register() {
                 </Link>
               </Grid>
             </Grid>
-            <ToastContainer />
           </Box>
         </Box>
       </Container>
