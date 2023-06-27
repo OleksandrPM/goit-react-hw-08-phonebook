@@ -1,3 +1,6 @@
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from 'redux/auth/authThunks';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -8,16 +11,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginThunk } from 'redux/auth/authThunks';
-import { useEffect } from 'react';
-import { successLoginMsg } from 'toast/toast-messadges';
+import {
+  errorLoginMsg,
+  successLoginMsg,
+} from 'toast-messadges/toast-messadges';
 
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const isAuth = useSelector(state => state.auth.access_token);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,15 +28,14 @@ export default function Login() {
     const email = data.get('email');
     const password = data.get('password');
 
-    dispatch(loginThunk({ email, password }));
+    dispatch(loginThunk({ email, password }))
+      .unwrap()
+      .then(() => {
+        navigate('/contacts');
+        successLoginMsg();
+      })
+      .catch(() => errorLoginMsg());
   };
-
-  console.log('isAuth in Login', typeof isAuth); //
-
-  useEffect(() => {
-    isAuth && navigate('/contacts');
-    isAuth && successLoginMsg();
-  }, [isAuth, navigate]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -95,7 +95,6 @@ export default function Login() {
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>
   );

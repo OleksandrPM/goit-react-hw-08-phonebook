@@ -22,7 +22,6 @@ import { ToastContainer } from 'react-toastify';
 const defaultTheme = createTheme();
 
 export default function Layout() {
-  const isLogin = true; //change on data from store
   const location = useLocation();
   const isStartPage = location.pathname === '/';
 
@@ -42,7 +41,9 @@ export default function Layout() {
               </Link>
               <Navigation />
             </nav>
-            <div>{isLogin && <UserMenu />}</div>
+            <div>
+              <UserMenu />
+            </div>
           </Toolbar>
         </AppBar>
 

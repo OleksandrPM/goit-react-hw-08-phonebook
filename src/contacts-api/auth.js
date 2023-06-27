@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-const instanse = axios.create({
+export const instanse = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
 });
 
 const setToken = token => {
   instanse.defaults.headers.common['Authorization'] = token;
+};
+
+export const deleteToken = () => {
+  delete instanse.defaults.headers.common['Authorization'];
 };
 
 export const signup = async user => {

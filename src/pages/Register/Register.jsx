@@ -1,4 +1,3 @@
-// import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,14 +10,14 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import { signup } from 'contacts-api/auth';
-import { errorRegisterMsg, successRegisterMsg } from 'toast/toast-messadges';
+import {
+  errorRegisterMsg,
+  successRegisterMsg,
+} from 'toast-messadges/toast-messadges';
 
 const defaultTheme = createTheme();
 
 export default function Register() {
-  // const isLogin = true; //change on the value from the store
-  // const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const handleSubmit = event => {
@@ -32,7 +31,7 @@ export default function Register() {
 
     signup({ name, email, password })
       .then(() => {
-        successRegisterMsg(); //It isn`t showed - think about it
+        successRegisterMsg();
         navigate('/login');
       })
       .catch(error => {

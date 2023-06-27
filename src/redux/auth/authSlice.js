@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { currentThunk, loginThunk } from './authThunks';
+import { currentThunk, loginThunk, logoutThunk } from './authThunks';
 
 const initialState = {
   access_token: '',
@@ -18,9 +18,15 @@ const handleFulfilled = (state, { payload }) => {
   state.access_token = payload.token;
 };
 
-const handleFulfilledUser = (state, { payload }) => {
+const handleFulfilledCurrent = (state, { payload }) => {
   state.isLoading = false;
   state.user = payload;
+};
+
+const handleFulfilledLogout = (state, { payload }) => {
+  state.isLoading = false;
+  state.access_token = '';
+  state.user = null;
 };
 
 //In the case of using "try-catch" and "rejectedError" it needs to use "payload" as the second argument
@@ -35,7 +41,8 @@ const authSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(loginThunk.fulfilled, handleFulfilled)
-      .addCase(currentThunk.fulfilled, handleFulfilledUser)
+      .addCase(currentThunk.fulfilled, handleFulfilledCurrent)
+      .addCase(logoutThunk.fulfilled, handleFulfilledLogout)
       .addMatcher(({ type }) => type.endsWith('/pending'), handlePending)
       .addMatcher(({ type }) => type.endsWith('/rejected'), handleRejected);
   },

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { current, login } from 'contacts-api/auth';
+import { current, login, logout } from 'contacts-api/auth';
 
 export const currentThunk = createAsyncThunk('auth/current', () => current());
 
@@ -15,3 +15,5 @@ export const loginThunk = createAsyncThunk(
     }
   }
 );
+
+export const logoutThunk = createAsyncThunk('auth/logout', () => logout());
