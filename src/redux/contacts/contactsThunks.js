@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   addContactApi,
-  deleteAllApi,
   deleteContactApi,
   getContactsApi,
 } from 'contacts-api/contacts-api';
@@ -36,20 +35,6 @@ export const deleteContact = createAsyncThunk(
     try {
       const response = await deleteContactApi(contactId);
       return response.data.id;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-//Too much requests problem
-export const deleteAll = createAsyncThunk(
-  'contacts/deleteAll',
-  async (contacts, thunkAPI) => {
-    try {
-      const response = await deleteAllApi(contacts);
-      console.log(response); //del
-      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

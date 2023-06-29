@@ -37,14 +37,3 @@ export function updateContactApi(contactId, newName, newNumber) {
     console.log(error);
   }
 }
-
-//Too much requests problem
-export function deleteAllApi(contacts) {
-  return Promise.all(
-    contacts.map(async ({ id }) => {
-      return deleteContactApi(id).then(data => {
-        return data;
-      });
-    })
-  );
-}

@@ -3,7 +3,6 @@ import {
   fetchContacts,
   addContact,
   deleteContact,
-  deleteAll,
 } from 'redux/contacts/contactsThunks';
 
 const contactsInitialState = {
@@ -49,14 +48,6 @@ const contactsSlice = createSlice({
         state.items = state.items.filter(item => item.id !== action.payload);
       })
       .addCase(deleteContact.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(deleteAll.pending, (state, action) => {}) //delete if unuseful
-      .addCase(deleteAll.fulfilled, (state, action) => {
-        // state.items = [];
-      })
-      .addCase(deleteAll.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectToken } from 'redux/auth/authSelectors';
 import { instanse, setToken } from 'contacts-api/auth-api';
 import { useEffect } from 'react';
+import { fetchContacts } from 'redux/contacts/contactsThunks';
 
 const UserMenu = lazy(() => import('../UserMenu'));
 
@@ -36,6 +37,7 @@ export default function Layout() {
   useEffect(() => {
     if (token !== '') {
       setToken(token);
+      dispatch(fetchContacts());
     }
   }, [dispatch, token]);
 

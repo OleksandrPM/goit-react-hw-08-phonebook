@@ -17,7 +17,7 @@ import {
 const persistConfig = {
   key: 'goit-react-hw-8-contacts',
   storage,
-  whitelist: ['contacts', 'auth'],
+  whitelist: ['auth'],
 };
 
 const rootReducer = combineReducers({
