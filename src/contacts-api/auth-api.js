@@ -4,8 +4,8 @@ export const instanse = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
 });
 
-const setToken = token => {
-  instanse.defaults.headers.common['Authorization'] = token;
+export const setToken = token => {
+  instanse.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 
 export const deleteToken = () => {
@@ -24,9 +24,12 @@ export const current = async () => {
 export const login = async user => {
   const { data } = await instanse.post('users/login', user);
   if ('token' in data) {
-    setToken(`Bearer ${data.token}`);
+    setToken(data.token);
   }
   return data;
 };
 
-export const logout = async () => await instanse.post('users/logout');
+export const logout = async () => {
+  const { data } = await instanse.post('users/logout');
+  return data;
+};

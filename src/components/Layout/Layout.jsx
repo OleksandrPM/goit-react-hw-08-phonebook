@@ -1,5 +1,4 @@
-// import { Suspense, lazy } from 'react';
-// import * as React from 'react';
+import { Suspense, lazy } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
@@ -10,20 +9,37 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Navigation from 'components/Navigation';
-import UserMenu from 'components/UserMenu';
+// import UserMenu from 'components/UserMenu';
 import InvitationText from 'components/InvitationText';
 import css from './Layout.module.css';
 // import ResponsiveAppBar from 'components/ResponsiveAppBar';
 import { ToastContainer } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectToken } from 'redux/auth/authSelectors';
+import { instanse, setToken } from 'contacts-api/auth-api';
+import { useEffect } from 'react';
 
-// const Loader = lazy(() => import('../Loader'));
+const UserMenu = lazy(() => import('../UserMenu'));
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function Layout() {
+  const token = useSelector(selectToken); //
+  console.log('In store ', token);
+
   const location = useLocation();
   const isStartPage = location.pathname === '/';
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token !== '') {
+      setToken(token);
+    }
+  }, [dispatch, token]);
+
+  console.log('In API instanse ', instanse.defaults.headers.common);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -41,9 +57,11 @@ export default function Layout() {
               </Link>
               <Navigation />
             </nav>
-            <div>
-              <UserMenu />
-            </div>
+            <Suspense>
+              <div>
+                <UserMenu />
+              </div>
+            </Suspense>
           </Toolbar>
         </AppBar>
 
@@ -59,7 +77,9 @@ export default function Layout() {
           >
             <Container maxWidth="sm">
               {isStartPage && <InvitationText />}
-              <Outlet />
+              <Suspense>
+                <Outlet />
+              </Suspense>
             </Container>
           </Box>
         </main>

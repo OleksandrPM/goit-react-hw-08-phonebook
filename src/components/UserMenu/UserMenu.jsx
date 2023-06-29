@@ -1,5 +1,6 @@
-import { deleteToken } from 'contacts-api/auth';
+import { deleteToken } from 'contacts-api/auth-api';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from 'redux/auth/authSelectors';
 import { logoutThunk } from 'redux/auth/authThunks';
 import {
   errorLogoutMsg,
@@ -7,7 +8,7 @@ import {
 } from 'toast-messadges/toast-messadges';
 
 export default function UserMenu() {
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   const handleOnClick = () => {

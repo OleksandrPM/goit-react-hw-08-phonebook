@@ -4,7 +4,7 @@ import {
   addContact,
   deleteContact,
   deleteAll,
-} from 'redux/contacts/contactsOperations';
+} from 'redux/contacts/contactsThunks';
 
 const contactsInitialState = {
   items: [],
@@ -15,6 +15,13 @@ const contactsInitialState = {
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
+  reducers: {
+    resetContactsState: {
+      reducer(state, action) {
+        return contactsInitialState;
+      },
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.pending, (state, action) => {
@@ -55,5 +62,7 @@ const contactsSlice = createSlice({
       });
   },
 });
+
+export const { resetContactsState } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;

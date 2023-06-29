@@ -1,20 +1,18 @@
-import axios from 'axios';
-
-axios.defaults.baseURL = 'https://648b6c3117f1536d65eaefae.mockapi.io';
+import { instanse } from './auth-api';
 
 export function getContactsApi() {
   try {
-    return axios.get('/contacts');
+    return instanse('/contacts');
   } catch (error) {
     console.log(error);
   }
 }
 
-export function addContactApi({ name, phone }) {
+export function addContactApi({ name, number }) {
   try {
-    return axios.post('/contacts', {
+    return instanse.post('/contacts', {
       name: name,
-      phone: phone,
+      number: number,
     });
   } catch (error) {
     console.log(error);
@@ -23,7 +21,18 @@ export function addContactApi({ name, phone }) {
 
 export function deleteContactApi(contactId) {
   try {
-    return axios.delete(`/contacts/${contactId}`);
+    return instanse.delete(`/contacts/${contactId}`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function updateContactApi(contactId, newName, newNumber) {
+  try {
+    return instanse.patch(`/contacts/${contactId}`, {
+      name: newName,
+      number: newNumber,
+    });
   } catch (error) {
     console.log(error);
   }

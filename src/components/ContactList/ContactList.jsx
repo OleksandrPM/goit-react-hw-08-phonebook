@@ -1,11 +1,8 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   selectContacts,
   selectFilteredContacts,
 } from 'redux/contacts/contactsSelectors';
-import { fetchContacts } from 'redux/contacts/contactsOperations';
-import { deleteAll} from 'redux/contacts/contactsOperations';
 import Contact from './Contact';
 import css from './ContactList.module.css';
 
@@ -17,15 +14,6 @@ const noContactsByRequestMsg = 'No contacts were found for your request';
 export default function ContactList() {
   const { items, isLoading, error } = useSelector(selectContacts);
   const contacts = useSelector(selectFilteredContacts);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-  const sendDeleteAll = () => {
-    dispatch(deleteAll(items));
-  };
 
   return (
     <>
@@ -36,21 +24,14 @@ export default function ContactList() {
           <>
             <ul className={css.contact_list}>
               {contacts.map(contact => {
-                const { id, name, phone } = contact;
+                const { id, name, number } = contact;
                 return (
                   <li className={css.contact_item} key={id}>
-                    <Contact name={name} number={phone} id={id} />
+                    <Contact name={name} number={number} id={id} />
                   </li>
                 );
               })}
             </ul>
-            <button
-              type="button"
-              onClick={sendDeleteAll}
-              className={css.delete_all_btn}
-            >
-              Delete all contacts
-            </button>
           </>
         ) : (
           <p>{noContactsByRequestMsg}</p>

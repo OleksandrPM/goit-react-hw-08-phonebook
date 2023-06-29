@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectItems } from 'redux/contacts/contactsSelectors';
 import css from './ContactForm.module.css';
-import { addContact } from 'redux/contacts/contactsOperations';
+import { addContact } from 'redux/contacts/contactsThunks';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
-  const [phone, setNumber] = useState('');
+  const [number, setNumber] = useState('');
   const items = useSelector(selectItems);
   const dispatch = useDispatch();
 
@@ -18,8 +18,14 @@ export default function ContactForm() {
   };
 
   const sendAddContact = () => {
-    if (!isContactPresent(name, phone, items)) {
-      dispatch(addContact({ name, phone }));
+    if (!isContactPresent(name, number, items)) {
+      dispatch(addContact({ name, number }))
+        .unwrap()
+        .then()
+        .catch(e => {
+          console.log(e);
+          alert(`Error: ${e}`);
+        });
     } else {
       alert(`${name} is already in the contacts`);
     }
