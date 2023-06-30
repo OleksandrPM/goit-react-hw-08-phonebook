@@ -69,7 +69,7 @@ export default function Layout() {
                 pb: 3,
               }}
             >
-              <Container maxWidth="sm" sx={{ ml: 1, mr: 1 }}>
+              <Container maxWidth="sm">
                 {isStartPage && <InvitationText />}
                 <Suspense>
                   <Outlet />
