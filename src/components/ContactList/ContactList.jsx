@@ -16,29 +16,27 @@ export default function ContactList() {
   const contacts = useSelector(selectFilteredContacts);
 
   return (
-    <>
+    <div className={css.contacts_box}>
       {isLoading && <p>{downloadingMsg}</p>}
       {error && <p>{`${errorMsg}${error}`}</p>}
       {items.length > 0 ? (
         contacts.length > 0 ? (
-          <>
-            <ul className={css.contact_list}>
-              {contacts.map(contact => {
-                const { id, name, number } = contact;
-                return (
-                  <li className={css.contact_item} key={id}>
-                    <Contact name={name} number={number} id={id} />
-                  </li>
-                );
-              })}
-            </ul>
-          </>
+          <ul className={css.contact_list}>
+            {contacts.map(contact => {
+              const { id, name, number } = contact;
+              return (
+                <li className={css.contact_item} key={id}>
+                  <Contact name={name} number={number} id={id} />
+                </li>
+              );
+            })}
+          </ul>
         ) : (
           <p>{noContactsByRequestMsg}</p>
         )
       ) : (
         !isLoading && <p>{noContactsMsg}</p>
       )}
-    </>
+    </div>
   );
 }

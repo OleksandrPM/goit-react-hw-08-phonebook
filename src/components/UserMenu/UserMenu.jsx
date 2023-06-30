@@ -7,6 +7,8 @@ import {
   successLogoutMsg,
 } from 'toast-messadges/toast-messadges';
 
+import css from './UserMenu.module.css';
+
 export default function UserMenu() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
@@ -25,9 +27,11 @@ export default function UserMenu() {
 
   return (
     user && (
-      <div>
+      <div className={css.menu}>
         <p>{user.email}</p>
-        <button onClick={handleOnClick}>Logout</button>
+        <button className={css.btn} onClick={handleOnClick}>
+          Logout
+        </button>
       </div>
     )
   );

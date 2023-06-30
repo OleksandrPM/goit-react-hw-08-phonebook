@@ -5,13 +5,13 @@ import css from './Contacts.module.css';
 
 export default function Contacts() {
   return (
-    <div className={css.app}>
+    <div className={css.contacts_page}>
       <ContactForm />
-      <section className={css.contacts}>
+      <div className={css.contacts_list}>
         <h2>Contacts</h2>
         <Filter />
         <ContactList />
-      </section>
+      </div>
     </div>
   );
 }

@@ -39,44 +39,45 @@ export default function Layout() {
       <ToastContainer />
       <CssBaseline />
       <div className={css.flexPage}>
-        <AppBar position="relative">
-          <Toolbar className={css.header}>
-            <nav className={css.nav}>
-              <Link to="/" className={css.logo}>
-                <ContactPhoneIcon sx={{ mr: 2 }} className={css.icon} />
-                <Typography variant="h6" noWrap>
-                  Phonebook
-                </Typography>
-              </Link>
-              <Navigation />
-            </nav>
-            <Suspense>
-              <div>
-                <UserMenu />
-              </div>
-            </Suspense>
-          </Toolbar>
-        </AppBar>
-
-        {/* <ResponsiveAppBar/> */}
-
-        <main>
-          <Box
-            sx={{
-              bgcolor: 'background.paper',
-              pt: 3,
-              pb: 3,
-            }}
-          >
-            <Container maxWidth="sm">
-              {isStartPage && <InvitationText />}
+        <div className={css.content}>
+          <AppBar position="relative">
+            <Toolbar className={css.header}>
+              <nav className={css.nav}>
+                <Link to="/" className={css.logo}>
+                  <ContactPhoneIcon sx={{ mr: 2 }} className={css.icon} />
+                  <Typography variant="h6" noWrap>
+                    Phonebook
+                  </Typography>
+                </Link>
+                <Navigation />
+              </nav>
               <Suspense>
-                <Outlet />
+                <div>
+                  <UserMenu />
+                </div>
               </Suspense>
-            </Container>
-          </Box>
-        </main>
+            </Toolbar>
+          </AppBar>
 
+          {/* <ResponsiveAppBar/> */}
+
+          <main>
+            <Box
+              sx={{
+                bgcolor: 'background.paper',
+                pt: 3,
+                pb: 3,
+              }}
+            >
+              <Container maxWidth="sm" sx={{ ml: 1, mr: 1 }}>
+                {isStartPage && <InvitationText />}
+                <Suspense>
+                  <Outlet />
+                </Suspense>
+              </Container>
+            </Box>
+          </main>
+        </div>
         {/* Footer */}
         <Box sx={{ bgcolor: 'background.paper', p: 2 }} component="footer">
           <Copyright />

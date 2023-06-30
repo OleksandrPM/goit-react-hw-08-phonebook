@@ -1,8 +1,9 @@
 .filter {
-  width: 400px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 .filter p {
@@ -14,4 +15,10 @@
   overflow: hidden;
   border-radius: 5px;
   border-color: black;
+}
+
+@media screen and (min-width: 768px) {
+  .filter {
+    width: 50%;
+  }
 }

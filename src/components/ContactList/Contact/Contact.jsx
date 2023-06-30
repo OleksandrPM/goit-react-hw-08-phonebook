@@ -17,7 +17,7 @@ export default function Contact({ id, name, number }) {
   };
 
   return (
-    <>
+    <div className={css.contact}>
       <p className={css.name}>{name}:</p>
       <p className={css.number}>{number}</p>
       <button
@@ -27,6 +27,6 @@ export default function Contact({ id, name, number }) {
       >
         Delete
       </button>
-    </>
+    </div>
   );
 }

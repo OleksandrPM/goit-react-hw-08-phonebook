@@ -1,0 +1,29 @@
+.contacts_page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.contacts_list {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media screen and (max-width: 374.98px) {
+  .contacts_page {
+    font-size: x-small;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .contacts_page {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .contacts_list {
+    min-width: 80%;
+  }
+}

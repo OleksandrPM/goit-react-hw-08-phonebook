@@ -1,0 +1,19 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  padding: 5px;
+}
+
+.btn {
+  width: 50%;
+  border-radius: 3px;
+  border: none;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: blue;
+  color: white;
+}
