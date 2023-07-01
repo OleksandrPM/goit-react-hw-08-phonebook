@@ -14,11 +14,14 @@ import {
   errorRegisterMsg,
   successRegisterMsg,
 } from 'toast-messadges/toast-messadges';
+import { useDispatch } from 'react-redux';
+import { signupThunk } from 'redux/auth/authThunks';
 
 const defaultTheme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -29,10 +32,11 @@ export default function Register() {
     const email = data.get('email').trim();
     const password = data.get('password');
 
-    signup({ name, email, password })
+    dispatch(signupThunk({ name, email, password }))
+      .unwrap()
       .then(() => {
         successRegisterMsg();
-        navigate('/login');
+        navigate('/contacts');
       })
       .catch(error => {
         errorRegisterMsg();

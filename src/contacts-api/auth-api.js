@@ -13,7 +13,12 @@ export const deleteToken = () => {
 };
 
 export const signup = async user => {
-  return await instanse.post('users/signup', user);
+  const { data } = await instanse.post('users/signup', user);
+  console.log(data); //
+  if ('token' in data) {
+    setToken(data.token);
+  }
+  return data;
 };
 
 export const current = async () => {

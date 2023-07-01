@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { currentThunk, loginThunk, logoutThunk } from './authThunks';
+import {
+  currentThunk,
+  loginThunk,
+  logoutThunk,
+  signupThunk,
+} from './authThunks';
 import { resetContactsState } from 'redux/contacts/contactsSlice';
 import { fetchContacts } from 'redux/contacts/contactsThunks';
 
@@ -13,6 +18,13 @@ const initialState = {
 const handleAllPending = state => {
   state.isLoading = true;
   state.error = '';
+};
+
+const handleSignupFulfilled = (state, { payload }) => {
+  console.log('It`s payload in thunk', payload); //
+  state.isLoading = false;
+  state.access_token = payload.token;
+  state.user = payload.user;
 };
 
 const handleLoginFulfilled = (state, { payload }) => {
@@ -44,6 +56,7 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
+      .addCase(signupThunk.fulfilled, handleSignupFulfilled)
       .addCase(loginThunk.fulfilled, handleLoginFulfilled)
       .addCase(currentThunk.fulfilled, handleCurrentFulfilled)
       .addCase(logoutThunk.fulfilled, handleLogoutFulfilled)
