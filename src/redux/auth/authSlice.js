@@ -21,7 +21,6 @@ const handleAllPending = state => {
 };
 
 const handleSignupFulfilled = (state, { payload }) => {
-  console.log('It`s payload in thunk', payload); //
   state.isLoading = false;
   state.access_token = payload.token;
   state.user = payload.user;
